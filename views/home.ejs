@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Blog Post</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>Naresh's Blog</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li
+        <% if(home) { %>
+            class="<%= home %>" 
+        <% } %> >
+        <a href="/">Home</a></li>
+        <li
+        <% if(createPost) { %>
+            class="<%= createPost %>" 
+        <% } %> >
+            <a href="/create-post">Create Post</a></li>
+        <li><a href="/tweets">Tweets</a></li>
+      </ul><br>
+    </div>
+
+    <div class="col-sm-9">
+       
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2><%= posts[0].postTitle %></h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by: <strong><%= posts[0].postBy %></strong>, <%= posts[0].postDateTime %>.</h5>
+      <h5><span class="label label-success"><%= posts[0].postTag %></span></h5><br>
+      <p><%= posts[0].postDescription %></p>
+      Share: <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet!</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <br><br>
+
+
+      <h4><small>POSTS</small></h4>
+      <hr>
+      <% if (posts) { %>
+        <% for(const post of posts) { %>
+      <h2><%= post.postTitle %></h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by: <strong><%= post.postBy %></strong>, <%= post.postDateTime %>.</h5>
+      <h5><span class="label label-danger"><%= post.postTag %></span></h5><br>
+      <p><%= post.postDescription %></p>
+      <hr>
+      <% } %>
+      <% }%>
+
+    </div>
+  </div>
+</div>
+</body>
